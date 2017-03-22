@@ -18,56 +18,38 @@ var linkList = function() {
     return newNode;
   }
 
-  function addNode(val) {
-    var newNode = newNode();
-
-    if (getHead() === null) {
-      headNode = newNode;
-      tailNode = newNode;
-    } else if(getHead.next === null){
-      tailNode = newNode;
-    } else {
-      tailNode.next = newNode;
-      tailNode = newNode;
-    }
-  }
-
-  function getNode(num) {
-    var currentNode = headNode;
-
-    for (var i = 0; i < num; i++) {
-      if(currentNode.next === null) {
-        return false;
-      } else {
-        currentNode = currentNode.next;
-      }
-    }
-    return currentNode;
-  }
-
   function saveHead(val) {
     var newHead = newNode(val);
-    var currentHead = getHead();
 
-    if (currentHead === null) {
-      currentHead = newHead;
+    if (headNode === null) {
+      headNode = newHead;
       tailNode = newHead;
     } else {
-      newHead.next = currentHead;
-      currentHead = newHead;
+      newHead.next = headNode;
+      headNode = newHead;
     }
   }
 
   function dumpList() {
-    var currentHead = getHead();
-    currentHead = null;
+    headNode = null;
+  }
+
+  function returnList() {
+    var dataList = "";
+    var travNode = getHead();
+
+    while (travNode !== null) {
+      dataList += travNode.value + " ";
+      travNode = travNode.next;
+    }
+
+    return dataList;
   }
 
   return {
     getHead,
     saveHead,
-    dumpList
+    dumpList,
+    returnList
   };
-
-
 };
